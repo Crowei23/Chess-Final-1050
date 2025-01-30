@@ -98,6 +98,8 @@ public class A2 {
 	}
 
 	/**
+	 * 
+	 * 
 	 * Insets the element into the heap and restores the heap property The new
 	 * element is added at the end of the heap and them moves it up the while
 	 * maintaining the structure
