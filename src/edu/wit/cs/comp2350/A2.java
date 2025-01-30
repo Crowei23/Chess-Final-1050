@@ -20,33 +20,32 @@ import java.util.Scanner;
 
 public class A2 {
 	
-	
 	/**
 	 * Builds the heap from the given array of float(s)
 	 * 
-	 * @param a, The array of float that will transformed into the heap
+	 * @param a,    The array of float that will transformed into the heap
 	 * @param size, The number of elements in the array
 	 */
-	
+
 	private static void build_heap(float[] a, int size) {
 		for (int i = size / 2 - 1; i >= 0; i--) {
 			heapify(a, size, i);
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
-	 * Ensures the heap property is maintained for the subtree
-	 * This method assume that the left and right subtrees
+	 * Ensures the heap property is maintained for the subtree This method assume
+	 * that the left and right subtrees
 	 * 
 	 * 
-	 * @param a, The array of the float element representing the heap
-	 * @param size, The total number of elements in the array 
-	 * @param i, The index of the root note 
+	 * @param a,    The array of the float element representing the heap
+	 * @param size, The total number of elements in the array
+	 * @param i,    The index of the root note
 	 */
 	private static void heapify(float[] a, int size, int i) {
-		
+
 		// Initializes the smallest root
 		int smallest = i;
 		// Calculate the indices for the left and right children
@@ -57,19 +56,19 @@ public class A2 {
 		if (left < size && a[left] < a[smallest]) {
 			smallest = left;
 		}
-		
+
 		// If right child is smaller then the smallest update the smallest
 		if (right < size && a[right] < a[smallest]) {
 			smallest = right;
 		}
-		
+
 		// If the smallest is not the root
 		if (smallest != i) {
 			// swaps the root with the smallest child
 			float temp_stor = a[i];
 			a[i] = a[smallest];
 			a[smallest] = temp_stor;
-			
+
 			// Recursively heapify the affected subtree to ensure the property is maintained
 			heapify(a, size, smallest);
 		}
@@ -80,32 +79,32 @@ public class A2 {
 	 * The minimum element is assumed to be at the root of the heap
 	 * 
 	 * 
-	 * @param a, The array of float elements representing the heap
-	 * @param heapSize, The current szie of the heap 
-	 * @return The minimum element that was removed from the heap 
+	 * @param a,        The array of float elements representing the heap
+	 * @param heapSize, The current szie of the heap
+	 * @return The minimum element that was removed from the heap
 	 */
-	
-	private static float extract_min(float[] a, int heapSize) {
+
+	private static float extract_min(float[] a, int heap_size) {
 		// The minimum element is the root
 		float min = a[0];
 
 		// Move the last element to the root and reduce the heap size
-		a[0] = a[heapSize - 1];
+		a[0] = a[heap_size - 1];
 
 		// Restore the heap property by heapifying from the root
-		heapify(a, heapSize - 1, 0);
+		heapify(a, heap_size - 1, 0);
 
 		return min;
 	}
-	
+
 	/**
-	 * Insets the element into the heap and restores the heap property 
-	 * The new element is added at the end of the heap and them moves 
-	 * it up the while maintaining the structure
+	 * Insets the element into the heap and restores the heap property The new
+	 * element is added at the end of the heap and them moves it up the while
+	 * maintaining the structure
 	 * 
 	 * 
-	 * @param a, The array of float elements representing the heap
-	 * @param value, The new value to be inserted into the heap
+	 * @param a,         The array of float elements representing the heap
+	 * @param value,     The new value to be inserted into the heap
 	 * @param heap_size, The current size of the heap
 	 */
 	private static void insert(float[] a, float value, int heap_size) {
@@ -124,12 +123,17 @@ public class A2 {
 
 	/**
 	 * 
-	 * @param a
-	 * @return
+	 * Loops through the heap to extracting the two smallest element, summing them
+	 * and inserting sum back into the heap.
+	 * 
+	 * @param a, An array of floats representing the element being processed. The
+	 *           array must not be null or 0
+	 * @return The remaining element in the heap is the smallest numbers after
+	 *         summing the other numbers together.
 	 */
 	public static float heapAdd(float[] a) {
 
-		// Handles the Null and ) lengths
+		// Handles the null and 0 lengths
 		if (a == null || a.length == 0) {
 
 			System.out.println("Array is empty or null, no sorting needed.");
@@ -141,11 +145,11 @@ public class A2 {
 		// Continuously extract the two smallest elements, sum them, and insert
 		// the sum back into the heap
 		while (heap_size > 1) {
-			// Extract two minimum elements from the heap
+			// Extract the minimum elements from the heap
 			float min1 = extract_min(a, heap_size);
-			heap_size--; // Decrease the heap size after extraction
+			heap_size--; // Decrease the heap size
 			float min2 = extract_min(a, heap_size);
-			heap_size--; // Decrease the heap size after extraction
+			heap_size--; // Decrease the heap size
 
 			// Sum the two minimum elements
 			float sum = min1 + min2;
